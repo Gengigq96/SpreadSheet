@@ -1,5 +1,8 @@
 package spreadsheet;
 
+import typeexpressions.Expression;
+import typevalues.MaybeValue;
+
 public class SpreadSheet {
 
     private static int SIZE = 5;
@@ -64,7 +67,7 @@ public class SpreadSheet {
         // Retorna el valor que potser hi ha a la cel·la
         // amb nom name.
         // Si hi ha un valor, es retorna una instància de
-        // SomeValue; si no hi ha, NoValue.
+        // SomeValue; si no hi ha, typevalues.NoValue.
         //TODO: implement this
         throw new UnsupportedOperationException();
     }
@@ -81,7 +84,7 @@ public class SpreadSheet {
     public static void put(String name, int value) {
         // Assigna a la cel·la amb nom name l’expressió
         // el valor value (Òbviament caldrà construir la
-        // representació d’aquest int com spreadsheet.Expression).
+        // representació d’aquest int com typeexpressions.Expression).
         // Això pot provocar avaluacions d’aquesta o
         // d’altres cel·les
 
@@ -91,7 +94,7 @@ public class SpreadSheet {
         // Assigna a la cel·la amb nom name la referència
         // a la cel·la amb nom refName (Òbviament caldrà
         // construir la representació d’aquesta
-        // referència com spreadsheet.Expression).
+        // referència com typeexpressions.Expression).
         // Això pot provocar avaluacions d’aquesta o
         // d’altres cel·les
 
