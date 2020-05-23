@@ -1,6 +1,8 @@
 package typevalues;
 
 
+import java.util.Objects;
+
 public class SomeValue extends MaybeValue {
 
     private Integer val;
@@ -17,5 +19,16 @@ public class SomeValue extends MaybeValue {
         return true;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SomeValue someValue = (SomeValue) o;
+        return Objects.equals(val, someValue.val);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(val);
+    }
 }

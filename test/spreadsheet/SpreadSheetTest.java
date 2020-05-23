@@ -1,18 +1,18 @@
 package spreadsheet;
-
+import static spreadsheet.SpreadSheet.*;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import typevalues.*;
+import typevalues.SomeValue;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-class SpreadSheetTest {
+public class SpreadSheetTest {
 
     @Test
     public void setUp(){
-        SpreadSheet ss = new SpreadSheet();
-        int i;
-        assertEquals(1,1);
+        put("a1", 12);
+        put("a2", 1);
+        put("b1", plus("a1","a2"));
+        assertEquals(new SomeValue(13),get("b1"));
     }
 
 

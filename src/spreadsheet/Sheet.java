@@ -1,7 +1,10 @@
 package spreadsheet;
 
+import typeexpressions.Expression;
 import typevalues.Cell;
+import typevalues.MaybeValue;
 import typevalues.NoValue;
+import typevalues.SomeValue;
 
 import java.util.HashMap;
 
@@ -14,13 +17,30 @@ public class Sheet {
     public Sheet(int x){
         for(int i = 0 ; i < x ; i++){
             for(int j = 1 ; j <= x ; j++){
-                celdas.put(String.valueOf(((char)indexChar+i)+j),new Cell(novalue.getNoValue()));
+                String text = Character.toString((char)indexChar+i);
+                text += j;
+                celdas.put(text,new Cell(novalue.getNoValue()));
             }
         }
-
-
-
     }
-
-
+    public void set(String name, Expression exp){
+        if(celdas.containsKey(name)){
+            celdas.replace(name,new Cell(exp));
+        }
+    }
+    public MaybeValue get(String name){
+        if(celdas.containsKey(name)){
+            MaybeValue value = celdas.get(name).get();
+            if(value.hasValue()){
+                SomeValue sv = (SomeValue) value;
+                return sv;
+            }else {
+                throw new UnsupportedOperationException();
+            }
+        }
+        throw new UnsupportedOperationException();
+    }
+    public Cell getCell(String name){
+        return celdas.get(name);
+    }
 }

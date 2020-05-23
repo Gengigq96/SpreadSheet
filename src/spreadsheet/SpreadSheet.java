@@ -1,10 +1,12 @@
 package spreadsheet;
 
 import typeexpressions.Expression;
+import typeexpressions.Plus;
 import typevalues.MaybeValue;
+import typevalues.Reference;
+import typevalues.SomeValue;
 
 public class SpreadSheet {
-
     private static int SIZE = 5;
     private static final Sheet SHEET = new Sheet(SIZE);
 
@@ -47,37 +49,25 @@ public class SpreadSheet {
     }
 
     public static Expression plus(String ref1, Expression expr2) {
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(new Reference(SHEET.getCell(ref1)), expr2);
     }
 
     public static Expression plus(String ref1, int value2) {
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(new Reference(SHEET.getCell(ref1)), new SomeValue(value2));
     }
 
     public static Expression plus(String ref1, String ref2) {
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(new Reference(SHEET.getCell(ref1)),new Reference(SHEET.getCell(ref2)));
     }
 
     // El mateix per a totes les combinacions de mult
 
     public static MaybeValue get(String name) {
-        // Retorna el valor que potser hi ha a la cel·la
-        // amb nom name.
-        // Si hi ha un valor, es retorna una instància de
-        // SomeValue; si no hi ha, typevalues.NoValue.
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return SHEET.get(name);
     }
 
     public static void put(String name, Expression expr) {
-        // Assigna a la cel·la amb nom name l’expressió
-        // expr.
-        // Això provocarà l’avaluació de la cel·la (la
-        // qual cosa pot propagar la avaluació a d’altres
-        // cel·les)
+        SHEET.set(name,expr);
 
     }
 
@@ -87,7 +77,7 @@ public class SpreadSheet {
         // representació d’aquest int com typeexpressions.Expression).
         // Això pot provocar avaluacions d’aquesta o
         // d’altres cel·les
-
+        SHEET.set(name,new SomeValue(value));
     }
 
     public static void put(String name, String refName) {
