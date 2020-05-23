@@ -10,7 +10,7 @@ public class SomeValue extends MaybeValue {
         this.val = i;
     }
 
-    protected Integer getValue() {
+    public Integer getValue() {
         return val;
     }
 
