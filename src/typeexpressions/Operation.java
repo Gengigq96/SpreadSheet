@@ -22,8 +22,8 @@ public abstract class Operation implements Expression {
             SomeValue sv1 = (SomeValue) mv1.evaluate();
             SomeValue sv2 = (SomeValue) mv2.evaluate();
             return new SomeValue(operate(sv1.getValue(), sv2.getValue()));
-        }else if(mv1.hasValue())return mv1;
-        else return mv2;
+        }else if(!mv1.hasValue())return mv1;
+        return mv2;
     }
 
 }

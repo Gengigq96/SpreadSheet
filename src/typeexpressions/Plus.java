@@ -14,10 +14,5 @@ public class Plus extends Operation {
         return i1+i2;
     }
 
-    @Override
-    public MaybeValue evaluate() {
-        //TODO: implements this
-        throw new UnsupportedOperationException();
-    }
 
 }

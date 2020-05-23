@@ -1,6 +1,5 @@
 package typevalues;
 
-import typeexpressions.Expression;
 
 public class SomeValue extends MaybeValue {
 

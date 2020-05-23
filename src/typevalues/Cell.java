@@ -5,17 +5,17 @@ import typeexpressions.Expression;
 public class Cell {
 
     private Expression exp;
-    private MaybeValue val;
 
     public Cell (){
 
     }
 
     public MaybeValue evaluate(){
-        return val.evaluate();
+        return exp.evaluate();
     }
 
-    public void set(Expression exp){
+    public void set(Expression _exp){
+        this.exp = _exp;
         //TODO: implements this
         throw new UnsupportedOperationException();
     }
