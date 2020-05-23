@@ -5,6 +5,7 @@ import typeexpressions.Expression;
 public class Cell {
 
     private Expression exp;
+    private MaybeValue val;
 
     public Cell (){
 
@@ -16,8 +17,6 @@ public class Cell {
 
     public void set(Expression _exp){
         this.exp = _exp;
-        //TODO: implements this
-        throw new UnsupportedOperationException();
     }
 
 
