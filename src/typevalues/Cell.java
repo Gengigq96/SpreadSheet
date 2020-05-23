@@ -7,8 +7,8 @@ public class Cell {
     private Expression exp;
     private MaybeValue val;
 
-    public Cell (){
-
+    public Cell (NoValue nv){
+        this.exp = nv;
     }
 
     public MaybeValue evaluate(){
