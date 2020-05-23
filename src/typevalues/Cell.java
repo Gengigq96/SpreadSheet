@@ -12,8 +12,7 @@ public class Cell {
     }
 
     public MaybeValue evaluate(){
-        //TODO: implements this
-        throw new UnsupportedOperationException();
+        return val.evaluate();
     }
 
     public void set(Expression exp){

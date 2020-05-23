@@ -10,12 +10,8 @@ public class Reference implements Expression {
         this.ref = ref;
     }
 
-
-
-
     @Override
     public MaybeValue evaluate() {
-        //TODO: implements this
-        throw new UnsupportedOperationException();
+        return ref.evaluate();
     }
 }

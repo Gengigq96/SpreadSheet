@@ -1,17 +1,22 @@
 package typevalues;
 
+import typeexpressions.Expression;
+
 public class SomeValue extends MaybeValue {
 
+    private Integer val;
 
-    @Override
-    public boolean hasValue() {
-        //TODO: implements this
-        throw new UnsupportedOperationException();
+    public SomeValue(int i){
+        this.val = i;
     }
 
-    @Override
-    public MaybeValue evaluate() {
-        //TODO: implements this
-        throw new UnsupportedOperationException();
+    protected Integer getValue() {
+        return val;
     }
+
+    public boolean isValue(){
+        return true;
+    }
+
+
 }
