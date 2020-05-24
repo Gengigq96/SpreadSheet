@@ -1,10 +1,12 @@
+/*
+Genís Graus Qui – 47698407H
+Adrián Lorenzo Plaza - 49259506S
+Jesús Fernández Cid de Rivera - 48053542X
+ */
 package spreadsheet;
 
-import typeexpressions.Expression;
 import typevalues.Cell;
-import typevalues.MaybeValue;
 import typevalues.NoValue;
-import typevalues.SomeValue;
 
 import java.util.HashMap;
 
@@ -26,6 +28,8 @@ public class Sheet {
     }
 
     public Cell getCell(String name){
+        if (celdas.containsKey(name))
         return celdas.get(name);
+        throw new IndexOutOfBoundsException("cell "+name+" cannot be found inside the sheet");
     }
 }

@@ -1,3 +1,8 @@
+/*
+Genís Graus Qui – 47698407H
+Adrián Lorenzo Plaza - 49259506S
+Jesús Fernández Cid de Rivera - 48053542X
+ */
 package spreadsheet;
 
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +27,11 @@ public class ComplexSpreadSheetTestCycle {
     @Test
     public void dependency_cycle(){
         assertEquals(NoValue.getNoValue(), get("c1"));
+    }
+    @Test
+    public void dependency_cycle_recalculate(){
+        put("c1", 1);
+        assertEquals(new SomeValue(1), get("c1"));
     }
 
     @AfterEach

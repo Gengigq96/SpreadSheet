@@ -1,3 +1,8 @@
+/*
+Genís Graus Qui – 47698407H
+Adrián Lorenzo Plaza - 49259506S
+Jesús Fernández Cid de Rivera - 48053542X
+ */
 package typevalues;
 
 import typeexpressions.Expression;
@@ -9,20 +14,24 @@ public class Cell extends Observable implements Observer {
     private Expression exp;
     private MaybeValue val;
     private List<Cell> subjects = new ArrayList<Cell>();
+
     public void clearSubjects(){
         this.subjects.clear();
     }
+
     public void addSubject(Cell subject) {
         subject.addObserver(this);
         this.subjects.add(subject);
 
     }
+
     public void set(Expression _exp){
         this.exp = _exp;
         evaluate(new HashSet<>());
         setChanged();
         notifyObservers();
     }
+
     public MaybeValue evaluate(Set<Cell> visited){
         if(!visited.contains(this)){
             visited.add(this);
@@ -50,6 +59,7 @@ public class Cell extends Observable implements Observer {
 
         return setCell;
     }
+
     @Override
     public void update(Observable o, Object arg) {
         evaluate(new HashSet<Cell>());

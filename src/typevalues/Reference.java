@@ -1,5 +1,10 @@
 package typevalues;
 
+/*
+Genís Graus Qui – 47698407H
+Adrián Lorenzo Plaza - 49259506S
+Jesús Fernández Cid de Rivera - 48053542X
+ */
 import typeexpressions.Expression;
 
 import java.util.Set;

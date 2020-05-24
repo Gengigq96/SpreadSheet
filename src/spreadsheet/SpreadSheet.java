@@ -1,3 +1,8 @@
+/*
+Genís Graus Qui – 47698407H
+Adrián Lorenzo Plaza - 49259506S
+Jesús Fernández Cid de Rivera - 48053542X
+ */
 package spreadsheet;
 
 import typeexpressions.Expression;
