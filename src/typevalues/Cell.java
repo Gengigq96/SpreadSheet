@@ -2,30 +2,47 @@ package typevalues;
 
 import typeexpressions.Expression;
 
-public class Cell {
+import java.util.*;
+
+public class Cell extends Observable implements Observer {
 
     private Expression exp;
     private MaybeValue val;
+    private List<Cell> subjects = new ArrayList<Cell>();
 
-    public Cell (Expression nv){
-        this.exp = nv;
-        evaluate();
+    public void addSubject(Cell subject) {
+        subject.addObserver(this);
+        this.subjects.add(subject);
     }
-    public Cell (){
+    public void set(Expression _exp){
+        this.exp = _exp;
+        evaluate();
+
+        setChanged();
+        notifyObservers();
     }
     public MaybeValue evaluate(){
         val = exp.evaluate();
         return val;
     }
 
-    public void set(Expression _exp){
-        this.exp = _exp;
-    }
-
     public MaybeValue get(){
         return  val;
     }
 
+    public Set<Cell> references(Boolean first) {
+        Set<Cell> setCell = new HashSet<>();
+        Iterator<Cell> it = exp.references().iterator();
+        while(it.hasNext()){
+            setCell.add(it.next());
+        }
+        if(!first) setCell.add(this);
 
 
+        return setCell;
+    }
+    @Override
+    public void update(Observable o, Object arg) {
+        evaluate();
+    }
 }

@@ -2,50 +2,38 @@ package spreadsheet;
 
 import typeexpressions.Expression;
 import typeexpressions.Plus;
-import typevalues.MaybeValue;
-import typevalues.Reference;
-import typevalues.SomeValue;
+import typevalues.*;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class SpreadSheet {
     private static int SIZE = 5;
     private static final Sheet SHEET = new Sheet(SIZE);
 
     public static Expression plus(Expression expr1, Expression expr2) {
-        // Crea i retorna una expressió corresponent a la
-        // suma de les dues subexpressions
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(expr1, expr2);
     }
 
     public static Expression plus(Expression expr1, int value2) {
-        // Crea i retorna una expressió corresponent a la
-        // suma de expr1 i de l’expressió que representa
-        // la constant value2
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(expr1, new SomeValue(value2));
     }
 
     public static Expression plus(Expression expr1, String ref2) {
-        // Crea i retorna una expressió corresponent a la
-        // suma de expr1 i de l’expressió que representa
-        // una referència a la cel·la amb nom ref2
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(expr1, new Reference(SHEET.getCell(ref2)));
     }
 
     public static Expression plus(int value1, Expression expr2) {
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(new SomeValue(value1), expr2);
     }
 
     public static Expression plus(int value1, int value2) {
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(new SomeValue(value1),new SomeValue(value2));
     }
 
     public static Expression plus(int value1, String ref2) {
-        //TODO: implement this
-        throw new UnsupportedOperationException();
+        return new Plus(new SomeValue(value1), new Reference(SHEET.getCell(ref2)));
     }
 
     public static Expression plus(String ref1, Expression expr2) {
@@ -63,35 +51,48 @@ public class SpreadSheet {
     // El mateix per a totes les combinacions de mult
 
     public static MaybeValue get(String name) {
-        return SHEET.get(name);
+        Cell cell = SHEET.getCell(name);
+        return cell.get();
     }
 
     public static void put(String name, Expression expr) {
-        SHEET.set(name,expr);
-
+        Cell cell = SHEET.getCell(name);
+        cell.set(expr);
+        Iterator<Cell> it = cell.references(true).iterator();
+        while(it.hasNext()){
+            cell.addSubject(it.next());
+        }
     }
 
     public static void put(String name, int value) {
-        // Assigna a la cel·la amb nom name l’expressió
-        // el valor value (Òbviament caldrà construir la
-        // representació d’aquest int com typeexpressions.Expression).
-        // Això pot provocar avaluacions d’aquesta o
-        // d’altres cel·les
-        SHEET.set(name,new SomeValue(value));
+        Cell cell = SHEET.getCell(name);
+        cell.set(new SomeValue(value));
+        Iterator<Cell> it = cell.references(true).iterator();
+        while(it.hasNext()){
+            cell.addSubject(it.next());
+        }
     }
 
     public static void put(String name, String refName) {
-        // Assigna a la cel·la amb nom name la referència
-        // a la cel·la amb nom refName (Òbviament caldrà
-        // construir la representació d’aquesta
-        // referència com typeexpressions.Expression).
-        // Això pot provocar avaluacions d’aquesta o
-        // d’altres cel·les
+        Cell cell = SHEET.getCell(name);
+        cell.set(new Reference(SHEET.getCell(refName)));
+        Iterator<Cell> it = cell.references(true).iterator();
+        while(it.hasNext()){
+            cell.addSubject(it.next());
+        }
 
     }
 
     public static void clear() {
-        // Esborra totes les cel·les del full de càlcul.
-
+        int indexChar = 97;
+        NoValue novalue = new NoValue();
+        for(int i = 0 ; i < SIZE ; i++){
+            for(int j = 1 ; j <= SIZE ; j++){
+                String text = Character.toString((char)indexChar+i);
+                text += j;
+                Cell cell = SHEET.getCell(text);
+                cell.set(novalue.getNoValue());
+            }
+        }
     }
 }

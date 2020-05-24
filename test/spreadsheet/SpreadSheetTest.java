@@ -10,8 +10,8 @@ public class SpreadSheetTest {
     @Test
     public void setUp(){
         put("a1", 12);
-        put("a2", 1);
         put("b1", plus("a1","a2"));
+        put("a2", 1);
         assertEquals(new SomeValue(13),get("b1"));
     }
 

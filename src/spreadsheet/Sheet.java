@@ -19,27 +19,13 @@ public class Sheet {
             for(int j = 1 ; j <= x ; j++){
                 String text = Character.toString((char)indexChar+i);
                 text += j;
-                celdas.put(text,new Cell(novalue.getNoValue()));
+                Cell init = new Cell();
+                init.set(novalue.getNoValue());
+                celdas.put(text,init);
             }
         }
     }
-    public void set(String name, Expression exp){
-        if(celdas.containsKey(name)){
-            celdas.replace(name,new Cell(exp));
-        }
-    }
-    public MaybeValue get(String name){
-        if(celdas.containsKey(name)){
-            MaybeValue value = celdas.get(name).get();
-            if(value.hasValue()){
-                SomeValue sv = (SomeValue) value;
-                return sv;
-            }else {
-                throw new UnsupportedOperationException();
-            }
-        }
-        throw new UnsupportedOperationException();
-    }
+
     public Cell getCell(String name){
         return celdas.get(name);
     }
