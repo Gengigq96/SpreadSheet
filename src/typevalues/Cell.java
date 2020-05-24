@@ -19,15 +19,18 @@ public class Cell extends Observable implements Observer {
     }
     public void set(Expression _exp){
         this.exp = _exp;
-        evaluate();
+        evaluate(new HashSet<Cell>());
         setChanged();
         notifyObservers();
     }
-    public MaybeValue evaluate(){
-        if(subjects.contains(this)){
+    public MaybeValue evaluate(Set<Cell> visited){
+        if(visited.contains(this)){
             val = NoValue.getNoValue();
         }
-        else val = exp.evaluate();
+        else {
+            visited.add(this);
+            val = exp.evaluate(visited);
+        }
         return val;
     }
 
@@ -48,6 +51,6 @@ public class Cell extends Observable implements Observer {
     }
     @Override
     public void update(Observable o, Object arg) {
-        evaluate();
+        evaluate(new HashSet<Cell>());
     }
 }

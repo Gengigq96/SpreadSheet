@@ -10,7 +10,7 @@ public abstract class MaybeValue implements Expression {
 
     public abstract boolean isValue();
 
-    public MaybeValue evaluate() {
+    public MaybeValue evaluate(Set<Cell> visited) {
 
         if(!this.hasValue()){
             return NoValue.getNoValue();

@@ -13,8 +13,8 @@ public class Reference implements Expression {
     }
 
     @Override
-    public MaybeValue evaluate() {
-        return ref.evaluate();
+    public MaybeValue evaluate(Set<Cell> visited) {
+        return ref.evaluate(visited);
     }
 
     @Override

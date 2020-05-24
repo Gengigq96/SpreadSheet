@@ -20,13 +20,11 @@ public abstract class Operation implements Expression {
 
     public abstract int operate(int i1, int i2);
 
-    public MaybeValue evaluate() {
-        MaybeValue mv1 = e1.evaluate();
-        MaybeValue mv2 = e2.evaluate();
+    public MaybeValue evaluate(Set<Cell> visited) {
+        MaybeValue mv1 = e1.evaluate(visited);
+        MaybeValue mv2 = e2.evaluate(visited);
         if (mv1.hasValue() && mv2.hasValue()) {
-            SomeValue sv1 = (SomeValue) mv1.evaluate();
-            SomeValue sv2 = (SomeValue) mv2.evaluate();
-            return new SomeValue(operate(sv1.getValue(), sv2.getValue()));
+            return new SomeValue(operate(mv1.getValue(), mv2.getValue()));
         }else if(!mv1.hasValue())return mv1;
         return mv2;
     }

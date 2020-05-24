@@ -7,6 +7,6 @@ import java.util.Set;
 
 public interface Expression {
 
-    MaybeValue evaluate();
+    MaybeValue evaluate(Set<Cell> visited);
     Set<Cell> references();
 }
