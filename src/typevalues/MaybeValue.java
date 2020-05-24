@@ -18,6 +18,7 @@ public abstract class MaybeValue implements Expression {
 
         return this;
     }
+    public abstract Integer getValue();
     public Set<Cell> references(){
 
         Set<Cell> setCell = new HashSet<>();

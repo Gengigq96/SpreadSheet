@@ -1,6 +1,7 @@
 package spreadsheet;
 
 import typeexpressions.Expression;
+import typeexpressions.Mult;
 import typeexpressions.Plus;
 import typevalues.*;
 
@@ -48,7 +49,42 @@ public class SpreadSheet {
         return new Plus(new Reference(SHEET.getCell(ref1)),new Reference(SHEET.getCell(ref2)));
     }
 
-    // El mateix per a totes les combinacions de mult
+    public static Expression mult(Expression expr1, Expression expr2) {
+        return new Mult(expr1, expr2);
+    }
+
+    public static Expression mult(Expression expr1, int value2) {
+        return new Mult(expr1, new SomeValue(value2));
+    }
+
+    public static Expression mult(Expression expr1, String ref2) {
+        return new Mult(expr1, new Reference(SHEET.getCell(ref2)));
+    }
+
+    public static Expression mult(int value1, Expression expr2) {
+        return new Mult(new SomeValue(value1), expr2);
+    }
+
+    public static Expression mult(int value1, int value2) {
+        return new Mult(new SomeValue(value1),new SomeValue(value2));
+    }
+
+    public static Expression mult(int value1, String ref2) {
+        return new Mult(new SomeValue(value1), new Reference(SHEET.getCell(ref2)));
+    }
+
+    public static Expression mult(String ref1, Expression expr2) {
+        return new Mult(new Reference(SHEET.getCell(ref1)), expr2);
+    }
+
+    public static Expression mult(String ref1, int value2) {
+        return new Mult(new Reference(SHEET.getCell(ref1)), new SomeValue(value2));
+    }
+
+    public static Expression mult(String ref1, String ref2) {
+        return new Mult(new Reference(SHEET.getCell(ref1)),new Reference(SHEET.getCell(ref2)));
+    }
+
 
     public static MaybeValue get(String name) {
         Cell cell = SHEET.getCell(name);
@@ -59,6 +95,7 @@ public class SpreadSheet {
         Cell cell = SHEET.getCell(name);
         cell.set(expr);
         Iterator<Cell> it = cell.references(true).iterator();
+        cell.clearSubjects();
         while(it.hasNext()){
             cell.addSubject(it.next());
         }
@@ -68,6 +105,7 @@ public class SpreadSheet {
         Cell cell = SHEET.getCell(name);
         cell.set(new SomeValue(value));
         Iterator<Cell> it = cell.references(true).iterator();
+        cell.clearSubjects();
         while(it.hasNext()){
             cell.addSubject(it.next());
         }
@@ -77,6 +115,7 @@ public class SpreadSheet {
         Cell cell = SHEET.getCell(name);
         cell.set(new Reference(SHEET.getCell(refName)));
         Iterator<Cell> it = cell.references(true).iterator();
+        cell.clearSubjects();
         while(it.hasNext()){
             cell.addSubject(it.next());
         }
@@ -85,13 +124,12 @@ public class SpreadSheet {
 
     public static void clear() {
         int indexChar = 97;
-        NoValue novalue = new NoValue();
         for(int i = 0 ; i < SIZE ; i++){
             for(int j = 1 ; j <= SIZE ; j++){
                 String text = Character.toString((char)indexChar+i);
                 text += j;
                 Cell cell = SHEET.getCell(text);
-                cell.set(novalue.getNoValue());
+                cell.set(NoValue.getNoValue());
             }
         }
     }

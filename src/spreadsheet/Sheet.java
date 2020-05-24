@@ -12,7 +12,6 @@ public class Sheet {
 
     private HashMap<String, Cell> celdas = new  HashMap<String, Cell>();
     private int indexChar = 97;
-    private NoValue novalue = new NoValue();
 
     public Sheet(int x){
         for(int i = 0 ; i < x ; i++){
@@ -20,7 +19,7 @@ public class Sheet {
                 String text = Character.toString((char)indexChar+i);
                 text += j;
                 Cell init = new Cell();
-                init.set(novalue.getNoValue());
+                init.set(NoValue.getNoValue());
                 celdas.put(text,init);
             }
         }

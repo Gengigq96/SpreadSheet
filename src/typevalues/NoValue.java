@@ -11,7 +11,9 @@ public class NoValue extends MaybeValue {
         }
         return noVal;
     }
-
+    public Integer getValue() {
+        return null;
+    }
     @Override
     public boolean isValue() {
         return false;

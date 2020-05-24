@@ -9,20 +9,25 @@ public class Cell extends Observable implements Observer {
     private Expression exp;
     private MaybeValue val;
     private List<Cell> subjects = new ArrayList<Cell>();
-
+    public void clearSubjects(){
+        this.subjects.clear();
+    }
     public void addSubject(Cell subject) {
         subject.addObserver(this);
         this.subjects.add(subject);
+
     }
     public void set(Expression _exp){
         this.exp = _exp;
         evaluate();
-
         setChanged();
         notifyObservers();
     }
     public MaybeValue evaluate(){
-        val = exp.evaluate();
+        if(subjects.contains(this)){
+            val = NoValue.getNoValue();
+        }
+        else val = exp.evaluate();
         return val;
     }
 
