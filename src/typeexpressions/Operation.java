@@ -24,7 +24,7 @@ public abstract class Operation implements Expression {
         MaybeValue mv1 = e1.evaluate(visited);
         MaybeValue mv2 = e2.evaluate(visited);
         if (mv1.hasValue() && mv2.hasValue()) {
-            return new SomeValue(operate(mv1.getValue(), mv2.getValue()));
+            return new SomeValue(operate((int)mv1.getValue(),(int) mv2.getValue()));
         }else if(!mv1.hasValue())return mv1;
         return mv2;
     }

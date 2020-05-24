@@ -19,7 +19,7 @@ public class Cell extends Observable implements Observer {
     }
     public void set(Expression _exp){
         this.exp = _exp;
-        evaluate(new HashSet<Cell>());
+        evaluate(new HashSet<>());
         setChanged();
         notifyObservers();
     }
