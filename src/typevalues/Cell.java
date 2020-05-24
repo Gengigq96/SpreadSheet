@@ -24,10 +24,7 @@ public class Cell extends Observable implements Observer {
         notifyObservers();
     }
     public MaybeValue evaluate(Set<Cell> visited){
-        if(visited.contains(this)){
-            val = NoValue.getNoValue();
-        }
-        else {
+        if(!visited.contains(this)){
             visited.add(this);
             val = exp.evaluate(visited);
         }
@@ -38,14 +35,18 @@ public class Cell extends Observable implements Observer {
         return  val;
     }
 
-    public Set<Cell> references(Boolean first) {
+    public Set<Cell> references(Boolean first, Set<Cell> visited) {
         Set<Cell> setCell = new HashSet<>();
-        Iterator<Cell> it = exp.references().iterator();
-        while(it.hasNext()){
-            setCell.add(it.next());
+        if(!visited.contains(this)) {
+            visited.add(this);
+            Iterator<Cell> it = exp.references(visited).iterator();
+            while (it.hasNext()) {
+                setCell.add(it.next());
+            }
+            if (!first) setCell.add(this);
+        }else{
+            setCell.add(this);
         }
-        if(!first) setCell.add(this);
-
 
         return setCell;
     }

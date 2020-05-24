@@ -18,7 +18,7 @@ public class Reference implements Expression {
     }
 
     @Override
-    public Set<Cell> references() {
-        return ref.references(false);
+    public Set<Cell> references(Set<Cell> visited) {
+        return ref.references(false,visited);
     }
 }

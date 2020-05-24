@@ -94,7 +94,7 @@ public class SpreadSheet {
     public static void put(String name, Expression expr) {
         Cell cell = SHEET.getCell(name);
         cell.set(expr);
-        Iterator<Cell> it = cell.references(true).iterator();
+        Iterator<Cell> it = cell.references(true,new HashSet<Cell>()).iterator();
         cell.clearSubjects();
         while(it.hasNext()){
             cell.addSubject(it.next());
@@ -104,7 +104,7 @@ public class SpreadSheet {
     public static void put(String name, int value) {
         Cell cell = SHEET.getCell(name);
         cell.set(new SomeValue(value));
-        Iterator<Cell> it = cell.references(true).iterator();
+        Iterator<Cell> it = cell.references(true, new HashSet<Cell>()).iterator();
         cell.clearSubjects();
         while(it.hasNext()){
             cell.addSubject(it.next());
@@ -114,7 +114,7 @@ public class SpreadSheet {
     public static void put(String name, String refName) {
         Cell cell = SHEET.getCell(name);
         cell.set(new Reference(SHEET.getCell(refName)));
-        Iterator<Cell> it = cell.references(true).iterator();
+        Iterator<Cell> it = cell.references(true, new HashSet<Cell>()).iterator();
         cell.clearSubjects();
         while(it.hasNext()){
             cell.addSubject(it.next());

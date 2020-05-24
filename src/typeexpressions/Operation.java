@@ -28,13 +28,13 @@ public abstract class Operation implements Expression {
         }else if(!mv1.hasValue())return mv1;
         return mv2;
     }
-    public Set<Cell> references() {
+    public Set<Cell> references(Set<Cell> visited) {
         Set<Cell> setCell = new HashSet<>();
-        Iterator<Cell> it = e1.references().iterator();
+        Iterator<Cell> it = e1.references(visited).iterator();
         while(it.hasNext()){
             setCell.add(it.next());
         }
-        Iterator<Cell> it2 = e2.references().iterator();
+        Iterator<Cell> it2 = e2.references(visited).iterator();
         while(it2.hasNext()){
             setCell.add(it2.next());
         }

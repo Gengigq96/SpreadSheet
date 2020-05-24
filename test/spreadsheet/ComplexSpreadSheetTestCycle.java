@@ -21,7 +21,7 @@ public class ComplexSpreadSheetTestCycle {
     }
     @Test
     public void dependency_cycle(){
-        assertEquals(NoValue.getNoValue(), get("c1").getValue());
+        assertEquals(NoValue.getNoValue(), get("c1"));
     }
 
     @AfterEach
