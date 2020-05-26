@@ -21,7 +21,6 @@ public class Cell extends Observable implements Observer {
 
     public void addSubject(Cell subject) {
         subject.addObserver(this);
-        this.subjects.add(subject);
 
     }
 
